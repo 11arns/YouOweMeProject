@@ -2,19 +2,37 @@ package com.example.YouOweMeProject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.YouOweMeProject.FriendsList.FriendsListModel;
+import com.example.YouOweMeProject.FriendsList.Friendslist_RecyclerViewAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class FriendsListActivity extends AppCompatActivity {
+
+    ArrayList<FriendsListModel> FriendListModels = new ArrayList<>();
+    int[] friendimage = {R.drawable.aida, R.drawable.ayu, R.drawable.ain};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friendslist);
+
+        //friends list recycler view
+        RecyclerView recyclerView = findViewById(R.id.friendslist_recyclerview);
+        setupfriendslistmodel();
+        Friendslist_RecyclerViewAdapter adapter = new Friendslist_RecyclerViewAdapter(this
+                , FriendListModels);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         // Initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -51,5 +69,20 @@ public class FriendsListActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+
+
+    }
+
+
+    private void setupfriendslistmodel(){
+        String[] name = getResources().getStringArray(R.array.friendname);
+        String[] debtstatus = getResources().getStringArray(R.array.debtstatus);
+        String[] debtamount = getResources().getStringArray(R.array.debtamount);
+
+        for(int i=0; i< name.length; i++ ){
+            FriendListModels.add(new FriendsListModel(name[i],debtstatus[i],debtamount[i], friendimage[i] ));
+        }
     }
 }
