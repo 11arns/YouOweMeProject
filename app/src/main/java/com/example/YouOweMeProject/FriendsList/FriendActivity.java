@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.YouOweMeProject.FriendsList.Friend.SettleUp.Confirmation;
+
 import com.example.YouOweMeProject.FriendsList.Friend.SettleUpActivity;
 import com.example.YouOweMeProject.R;
 
@@ -38,7 +38,7 @@ public class FriendActivity extends AppCompatActivity {
 
 
 
-        getSupportActionBar().setTitle("Your Friend Details");
+        getSupportActionBar().setTitle("Friend Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_back);
 

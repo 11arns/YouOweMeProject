@@ -8,7 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.YouOweMeProject.FriendsList.AddFriendActivity;
+import com.example.YouOweMeProject.FriendsList.Friend.SettleUpActivity;
 import com.example.YouOweMeProject.FriendsList.FriendActivity;
 import com.example.YouOweMeProject.FriendsList.FriendsListInterface;
 import com.example.YouOweMeProject.FriendsList.FriendsListModel;
@@ -73,7 +77,14 @@ public class FriendsListActivity extends AppCompatActivity implements FriendsLis
             }
         });
 
-
+        Button AddFriendButton = findViewById(R.id.AddFriendButton);
+        AddFriendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FriendsListActivity.this, AddFriendActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
