@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Bottom Navigation Activity</string>
+
+    <string name="Currency">RM</string>
+
+
+    Array for friends list recycler view
+
+    <string-array name="friendname">
+        <item>aida</item>
+        <item>ayu</item>
+        <item>ayu</item>
+    </string-array>
+
+    <string-array name="debtstatus">
+        <item>owes you</item>
+        <item>owes you</item>
+        <item>owes you</item>
+    </string-array>
+
+    <string-array name="debtamount">
+        <item>50</item>
+        <item>25</item>
+        <item>25</item>
+    </string-array>
+
 </resources>
