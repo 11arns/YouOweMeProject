@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main);
 
         // Initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.home:
                         return true;
                     case R.id.friend:
-                        startActivity(new Intent(getApplicationContext(),FriendActivity.class));
+                        startActivity(new Intent(getApplicationContext(), FriendsListActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.add_expenses:

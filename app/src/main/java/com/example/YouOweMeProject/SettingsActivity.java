@@ -15,22 +15,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button buttontoprofile;
+    Button ProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.settings);
 
-        buttontoprofile = (Button)findViewById(R.id.buttontoprofile);
+        ProfileButton = (Button)findViewById(R.id.ProfileButton);
 
-        buttontoprofile.setOnClickListener(new View.OnClickListener() {
+        ProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (SettingsActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
+
 
         // Initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -50,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.friend:
-                        startActivity(new Intent(getApplicationContext(),FriendActivity.class));
+                        startActivity(new Intent(getApplicationContext(), FriendsListActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.add_expenses:

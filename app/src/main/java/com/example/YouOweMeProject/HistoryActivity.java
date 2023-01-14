@@ -14,7 +14,7 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
+        setContentView(R.layout.history);
 
         // Initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -35,7 +35,7 @@ public class HistoryActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.friend:
-                        startActivity(new Intent(getApplicationContext(),FriendActivity.class));
+                        startActivity(new Intent(getApplicationContext(), FriendsListActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.add_expenses:
