@@ -57,6 +57,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FriendsList.Friend.SettleUp.Confirmation"
+            android:parentActivityName = ".FriendsList.Friend.SettleUpActivity"
+            >
+        </activity>
     </application>
 
 </manifest>

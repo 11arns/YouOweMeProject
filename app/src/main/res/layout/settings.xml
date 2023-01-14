@@ -95,7 +95,7 @@
 
 
     <Button
-        android:id="@+id/LogOutButton"
+        android:id="@+id/LOButton"
         android:layout_width="239dp"
         android:layout_height="66dp"
         android:layout_marginTop="52dp"

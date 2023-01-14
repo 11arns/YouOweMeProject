@@ -1,12 +1,17 @@
 package com.example.YouOweMeProject.FriendsList;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.YouOweMeProject.FriendsList.Friend.SettleUp.Confirmation;
+import com.example.YouOweMeProject.FriendsList.Friend.SettleUpActivity;
 import com.example.YouOweMeProject.R;
 
 public class FriendActivity extends AppCompatActivity {
@@ -36,6 +41,15 @@ public class FriendActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Your Friend Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_back);
+
+        Button SettleAllButton = findViewById(R.id.SettleAllButton);
+        SettleAllButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FriendActivity.this, Confirmation.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
