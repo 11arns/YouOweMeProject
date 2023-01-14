@@ -18,7 +18,7 @@ public class AddAmount extends AppCompatActivity {
 
     Button btnsave;
     Spinner spinner;
-    String [] friend = {"Izzati", "Ayu", "Aida", "Ahmad"};
+    String [] friend = {"-","Izzati", "Ayu", "Aida", "Ahmad"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,6 @@ public class AddAmount extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String value=parent.getItemAtPosition(position).toString();
-                Toast.makeText(AddAmount.this,value, Toast.LENGTH_SHORT).show();
 
             }
 

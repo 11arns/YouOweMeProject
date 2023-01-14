@@ -31,6 +31,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
                 android:text="Amount (RM)"
+                android:textColor="@color/grey"
                 android:textSize="18sp" />
 
             <EditText
@@ -39,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:paddingLeft="10dp"
+                android:textColor="@color/grey"
                 android:textSize="20sp"
                 android:inputType="numberDecimal|numberSigned"/>
 
@@ -47,6 +49,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
+                android:textColor="@color/grey"
                 android:text="Name of Expenses"
                 android:textSize="18sp" />
 
@@ -55,6 +58,7 @@
                 android:layout_width="262dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
+                android:textColor="@color/grey"
                 android:paddingLeft="10dp"
                 android:textSize="20sp" />
 
@@ -66,7 +70,8 @@
                 android:layout_marginTop="30dp"
                 android:paddingLeft="10dp"
                 android:text="Friend"
-                android:textSize="20dp" />
+                android:textColor="@color/grey"
+                android:textSize="18dp" />
 
             <Spinner
                 android:id="@+id/spinner"
@@ -90,12 +95,5 @@
         android:textSize="18sp"
         android:text="save"
         android:textColor="#fff" />
-
-    <EditText
-        android:id="@+id/editTextNumberDecimal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal" />
 
 </LinearLayout>
