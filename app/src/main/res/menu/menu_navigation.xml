@@ -14,7 +14,7 @@
     <item
         android:id="@+id/add_expenses"
         android:title="Add Expenses"
-        android:icon="@drawable/add_expenses"/>
+        android:icon="@drawable/ic_baseline_add_circle_24"/>
 
     <item
         android:id="@+id/history"

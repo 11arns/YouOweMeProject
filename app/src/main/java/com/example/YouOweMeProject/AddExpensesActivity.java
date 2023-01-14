@@ -21,6 +21,7 @@ public class AddExpensesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addexpenses);
+        getSupportActionBar().setTitle("Add Expenses");
 
         btnyo = (Button)findViewById(R.id.btnyo);
         btnoy = (Button)findViewById(R.id.btnoy);
