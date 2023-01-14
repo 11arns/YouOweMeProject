@@ -27,6 +27,12 @@
             android:name="com.example.YouOweMeProject.Settings.ProfileActivity"
             android:parentActivityName="com.example.YouOweMeProject.SettingsActivity" />
         <activity
+            android:name="com.example.YouOweMeProject.Settings.PrivacyActivity"
+            android:parentActivityName="com.example.YouOweMeProject.SettingsActivity" />
+        <activity
+            android:name="com.example.YouOweMeProject.Settings.AboutUsActivity"
+            android:parentActivityName="com.example.YouOweMeProject.SettingsActivity" />
+        <activity
             android:name="com.example.YouOweMeProject.Settings.Profile.EditProfileActivity"
             android:parentActivityName="com.example.YouOweMeProject.Settings.ProfileActivity" />
 

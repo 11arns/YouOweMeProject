@@ -10,24 +10,47 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.YouOweMeProject.Settings.ProfileActivity;
+import com.example.YouOweMeProject.Settings.PrivacyActivity;
+import com.example.YouOweMeProject.Settings.AboutUsActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class SettingsActivity extends AppCompatActivity {
 
     Button ProfileButton;
+    Button PrivacyButton;
+    Button AboutUsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+        getSupportActionBar().setTitle("Settings");
 
-        ProfileButton = (Button)findViewById(R.id.ProfileButton);
-
+        ProfileButton = (Button) findViewById(R.id.ProfileButton);
         ProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (SettingsActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(SettingsActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        PrivacyButton = (Button) findViewById(R.id.PrivacyButton);
+        PrivacyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this, PrivacyActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        AboutUsButton = (Button) findViewById(R.id.AboutUsButton);
+        AboutUsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this, AboutUsActivity.class);
                 startActivity(intent);
             }
         });
@@ -51,7 +74,7 @@ public class SettingsActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.friend:
-                        startActivity(new Intent(getApplicationContext(), FriendsListActivity.class));
+                        startActivity(new Intent(getApplicationContext(),FriendsListActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.add_expenses:
@@ -59,7 +82,7 @@ public class SettingsActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.history:
-                        startActivity(new Intent(getApplicationContext(), HistoryActivity.class));
+                        startActivity(new Intent(getApplicationContext(),HistoryActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.settings:
