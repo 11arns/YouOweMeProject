@@ -9,13 +9,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.YouOweMeProject.FriendsList.FriendActivity;
+import com.example.YouOweMeProject.FriendsList.FriendsListInterface;
 import com.example.YouOweMeProject.FriendsList.FriendsListModel;
 import com.example.YouOweMeProject.FriendsList.Friendslist_RecyclerViewAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class FriendsListActivity extends AppCompatActivity {
+public class FriendsListActivity extends AppCompatActivity implements FriendsListInterface {
+
 
     ArrayList<FriendsListModel> FriendListModels = new ArrayList<>();
     int[] friendimage = {R.drawable.aida, R.drawable.ayu, R.drawable.ain};
@@ -29,7 +32,7 @@ public class FriendsListActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.friendslist_recyclerview);
         setupfriendslistmodel();
         Friendslist_RecyclerViewAdapter adapter = new Friendslist_RecyclerViewAdapter(this
-                , FriendListModels);
+                , FriendListModels, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -84,5 +87,17 @@ public class FriendsListActivity extends AppCompatActivity {
         for(int i=0; i< name.length; i++ ){
             FriendListModels.add(new FriendsListModel(name[i],debtstatus[i],debtamount[i], friendimage[i] ));
         }
+    }
+
+    @Override
+    public void onitemclick(int position) {
+        Intent intent = new Intent( FriendsListActivity.this, FriendActivity.class);
+        intent.putExtra("Friend Name", FriendListModels.get(position).getFriendname());
+        intent.putExtra("Debt Status", FriendListModels.get(position).getDebtstatus());
+        intent.putExtra("Debt Amount", FriendListModels.get(position).getDebtamount());
+        intent.putExtra("Image", FriendListModels.get(position).getImage());
+
+        startActivity(intent);
+
     }
 }

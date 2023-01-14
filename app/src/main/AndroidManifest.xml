@@ -46,6 +46,9 @@
             android:name="com.example.YouOweMeProject.FriendsListActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.YouOweMeProject.FriendsList.FriendActivity"
+            android:parentActivityName="com.example.YouOweMeProject.FriendsListActivity" />
+        <activity
             android:name="com.example.YouOweMeProject.MainActivity"
             android:exported="true">
             <intent-filter>
