@@ -6,15 +6,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.YouOweMeProject.AddExpenses.AddAmount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AddExpensesActivity extends AppCompatActivity {
+
+    Button btnyo;
+    Button btnoy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addexpenses);
+
+        btnyo = (Button)findViewById(R.id.btnyo);
+        btnoy = (Button)findViewById(R.id.btnoy);
+
+        btnyo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (AddExpensesActivity.this, AddAmount.class);
+                startActivity(intent);
+            }
+        });
+
+        btnoy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (AddExpensesActivity.this, AddAmount.class);
+                startActivity(intent);
+            }
+        });
 
         // Initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
