@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1275" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/about.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/add_expenses.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/friend.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/history.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/home.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/nav_back.xml" value="0.1865" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/selector.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/settings.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/activity_about.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/activity_add_expenses.xml" value="0.125" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/activity_dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/activity_friend.xml" value="0.1390625" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/activity_history.xml" value="0.1390625" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/activity_settings.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/activity_settings_profile.xml" value="0.184375" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/settings_profile.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/layout/settings_profile_editprofile.xml" value="0.1578125" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/menu/menu_navigation.xml" value="0.1" />
+        <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/menu/nav_back.xml" value="0.16666666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
