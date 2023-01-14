@@ -23,7 +23,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/border_purple"
             android:orientation="vertical"
-            android:padding="50dp">
+            android:padding="60dp">
 
             <TextView
                 android:layout_width="match_parent"
