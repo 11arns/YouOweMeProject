@@ -7,13 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".AddExpensesActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Expenses"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnyo"
+            android:layout_width="330dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="150dp"
+            android:backgroundTint="#914CBB"
+            android:text="You Owe"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            app:cornerRadius="20dp" />
+
+        <Button
+            android:id="@+id/btnoy"
+            android:layout_width="330dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#914CBB"
+            android:text="Owe You"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            app:cornerRadius="20dp" />
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
