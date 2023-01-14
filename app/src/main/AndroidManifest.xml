@@ -13,6 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BottomNavigationActivity"
         tools:targetApi="31">
+
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            />
+        <activity android:name=".Welcome.RegistrationActivity" android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+        <activity android:name=".Welcome.LoginActivity" android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            />
+
         <activity
             android:name=".FriendsList.AddFriendActivity"
             android:parentActivityName=".FriendsListActivity"
