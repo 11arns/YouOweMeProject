@@ -31,15 +31,16 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
                 android:text="Amount (RM)"
-                android:textSize="19sp" />
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/amount"
                 android:layout_width="262dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:paddingLeft="85dp"
-                android:textSize="23sp" />
+                android:paddingLeft="10dp"
+                android:textSize="20sp"
+                android:inputType="numberDecimal|numberSigned"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -47,15 +48,15 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
                 android:text="Name of Expenses"
-                android:textSize="19sp" />
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/expenses"
                 android:layout_width="262dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:paddingLeft="85dp"
-                android:textSize="23sp" />
+                android:paddingLeft="10dp"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/friend"
@@ -89,4 +90,12 @@
         android:textSize="18sp"
         android:text="save"
         android:textColor="#fff" />
+
+    <EditText
+        android:id="@+id/editTextNumberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
 </LinearLayout>
