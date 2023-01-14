@@ -119,7 +119,7 @@
         android:id="@+id/SettleAllButton"
         android:layout_width="239dp"
         android:layout_height="66dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginBottom="44dp"
         android:backgroundTint="@color/purple"
         android:gravity="center"
         android:text="SETTLE ALL"
@@ -128,8 +128,6 @@
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.838" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

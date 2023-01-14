@@ -9,6 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.FriendsList.Friend.SettleUpActivity;
+import com.example.YouOweMeProject.FriendsList.FriendActivity;
+import com.example.YouOweMeProject.FriendsListActivity;
+import com.example.YouOweMeProject.MainActivity;
 import com.example.YouOweMeProject.R;
 
 public class Confirmation extends AppCompatActivity {
@@ -19,7 +22,14 @@ public class Confirmation extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.friendslist_friend_settleup_confirmation);
 
-
+            Button Successfull = findViewById(R.id.btnsuccessful);
+            Successfull.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Confirmation.this, FriendsListActivity.class);
+                    startActivity(intent);
+                }
+            });
 
 
         }

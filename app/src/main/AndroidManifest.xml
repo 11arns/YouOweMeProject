@@ -61,6 +61,10 @@
             android:parentActivityName = ".FriendsList.Friend.SettleUpActivity"
             >
         </activity>
+        <activity android:name=".FriendsList.Friend.SettleUpActivity"
+            android:parentActivityName = ".FriendsList.Friend.SettleUpActivity"
+            >
+        </activity>
     </application>
 
 </manifest>

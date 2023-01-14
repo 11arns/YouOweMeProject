@@ -46,7 +46,7 @@ public class FriendActivity extends AppCompatActivity {
         SettleAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FriendActivity.this, Confirmation.class);
+                Intent intent = new Intent(FriendActivity.this, SettleUpActivity.class);
                 startActivity(intent);
             }
         });

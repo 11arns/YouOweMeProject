@@ -67,14 +67,16 @@
 
     <Button
         android:id="@+id/btnsuccessful"
-        android:layout_width="276dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="48dp"
+        android:layout_width="239dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="44dp"
         android:backgroundTint="@color/purple"
-        android:text="Button"
+        android:gravity="center"
+        android:text="DONE"
         android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
