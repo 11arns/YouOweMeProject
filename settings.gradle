@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Bottom Navigation Activity"
+rootProject.name = "You Owe Me Project"
 include ':app'

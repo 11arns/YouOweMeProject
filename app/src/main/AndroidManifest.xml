@@ -31,7 +31,7 @@
             android:parentActivityName="com.example.YouOweMeProject.Settings.ProfileActivity" />
 
         <activity
-            android:name="com.example.YouOweMeProject.FriendActivity"
+            android:name="com.example.YouOweMeProject.FriendsListActivity"
             android:exported="false" />
         <activity
             android:name="com.example.YouOweMeProject.MainActivity"
