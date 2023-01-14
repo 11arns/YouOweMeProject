@@ -45,10 +45,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                 switch(item.getItemId())
                 {
-
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         overridePendingTransition(0,0);
+                        return true;
                     case R.id.friend:
                         startActivity(new Intent(getApplicationContext(),FriendActivity.class));
                         overridePendingTransition(0,0);
@@ -58,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.history:
-                        startActivity(new Intent(getApplicationContext(),HistoryActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HistoryActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.settings:
