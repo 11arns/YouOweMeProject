@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.YouOweMeProject.AddExpenses.AddAmount;
+import com.example.YouOweMeProject.AddExpenses.OweYou;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AddExpensesActivity extends AppCompatActivity {
@@ -37,7 +38,7 @@ public class AddExpensesActivity extends AppCompatActivity {
         btnoy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (AddExpensesActivity.this, AddAmount.class);
+                Intent intent = new Intent (AddExpensesActivity.this, OweYou.class);
                 startActivity(intent);
             }
         });

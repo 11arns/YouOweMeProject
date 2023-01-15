@@ -5,15 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.YouOweMeProject.Settings.ProfileActivity;
 import com.example.YouOweMeProject.Settings.PrivacyActivity;
 import com.example.YouOweMeProject.Settings.AboutUsActivity;
 
+import com.example.YouOweMeProject.Welcome.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+
+import org.w3c.dom.Text;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -27,6 +34,11 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
         getSupportActionBar().setTitle("Settings");
+
+        //set data
+        TextView settingsActivityUsernameDisplay = findViewById(R.id.Username);
+        settingsActivityUsernameDisplay.setText(LoginActivity.user.getUsername());
+
 
         ProfileButton = (Button) findViewById(R.id.ProfileButton);
         ProfileButton.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +64,16 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SettingsActivity.this, AboutUsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        Button logout = findViewById(R.id.LOButton);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(SettingsActivity.this, WelcomeActivity.class));
+                Toast.makeText(SettingsActivity.this, "See you soon!", Toast.LENGTH_SHORT).show();
             }
         });
 
