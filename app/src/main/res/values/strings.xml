@@ -24,4 +24,18 @@
         <item>25</item>
     </string-array>
 
+    Array for friend expenses recycler view
+    <string-array name="expensename">
+        <item>trip</item>
+        <item> ticket</item>
+    </string-array>
+    <string-array name="expensestatus">
+        <item>you owe</item>
+        <item>owe you</item>
+    </string-array>
+    <string-array name="expenseamount">
+        <item>50</item>
+        <item>100</item>
+    </string-array>
+
 </resources>

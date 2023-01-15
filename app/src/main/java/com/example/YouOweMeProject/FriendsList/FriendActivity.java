@@ -9,12 +9,18 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.YouOweMeProject.FriendsList.Friend.SettleUpActivity;
 import com.example.YouOweMeProject.R;
 
+import java.util.ArrayList;
+
 public class FriendActivity extends AppCompatActivity {
+    ArrayList<friendmodel> friendmodels = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,5 +57,24 @@ public class FriendActivity extends AppCompatActivity {
             }
         });
 
+        RecyclerView recyclerView = findViewById(R.id.friend_recyclerview);
+
+        setUpFriendModel();
+        friend_recyclerviewadapter adapter = new friend_recyclerviewadapter(this, friendmodels);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+    }
+
+    private void setUpFriendModel(){
+        String[]  expensenameTV= getResources().getStringArray(R.array.expensename);
+        String[]  expenseamountTV= getResources().getStringArray(R.array.expenseamount);
+        String[]  expensestatusTV= getResources().getStringArray(R.array.expensestatus);
+
+        for (int i=0; i<expensenameTV.length; i++){
+            friendmodels.add(new friendmodel(expensenameTV[i], expensestatusTV[i], expenseamountTV[i]));
+        }
     }
 }
