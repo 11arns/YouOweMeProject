@@ -49,7 +49,8 @@
             android:parentActivityName="com.example.YouOweMeProject.AddExpensesActivity" />
         <activity
             android:name="com.example.YouOweMeProject.AddExpenses.Amount.ConfirmationPage"
-            android:parentActivityName="com.example.YouOweMeProject.AddExpenses.AddAmount" />
+            android:parentActivityName="com.example.YouOweMeProject.AddExpenses.AddAmount"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity
             android:name="com.example.YouOweMeProject.HistoryActivity"
             android:exported="false" />
@@ -85,10 +86,18 @@
         </activity>
         <activity
             android:name=".FriendsList.Friend.SettleUp.Confirmation"
-            android:parentActivityName=".FriendsList.Friend.SettleUpActivity"></activity>
+            android:parentActivityName=".FriendsList.Friend.SettleUpActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
         <activity
             android:name=".FriendsList.Friend.SettleUpActivity"
             android:parentActivityName=".FriendsList.Friend.SettleUpActivity"></activity>
+        <activity
+            android:name=".FriendsList.AddFriend.Failed"
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+        <activity
+            android:name=".FriendsList.AddFriend.Successful"
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+
 
     </application>
 

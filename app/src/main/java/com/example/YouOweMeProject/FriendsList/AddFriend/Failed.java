@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.FriendsList.AddFriendActivity;
-import com.example.YouOweMeProject.FriendsList.FriendActivity;
+
 import com.example.YouOweMeProject.FriendsListActivity;
 import com.example.YouOweMeProject.R;
 
