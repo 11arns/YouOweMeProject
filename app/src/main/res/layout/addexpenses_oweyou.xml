@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".AddExpenses.AddAmount">
+    tools:context=".AddExpenses.OweYou">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -91,9 +91,9 @@
         android:layout_height="62dp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="30dp"
-        android:backgroundTint="#BB4C4C"
+        android:backgroundTint="#4CBB57"
         android:textSize="18sp"
         android:text="save"
-        android:textColor="#fff" />
+        android:textColor="#fff"/>
 
 </LinearLayout>

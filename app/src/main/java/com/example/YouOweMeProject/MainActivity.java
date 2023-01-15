@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.example.YouOweMeProject.Welcome.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +25,21 @@ public class MainActivity extends AppCompatActivity {
         // Set Home selected
         bottomNavigationView.setSelectedItemId(R.id.home);
 
+        //Set data
+        TextView mainActivityUsernameDisplay = findViewById(R.id.textView17);
+        mainActivityUsernameDisplay.setText(LoginActivity.user.getUsername());
+
+        TextView totalOweYou = findViewById(R.id.txt4);
+        TextView totalYouOwe = findViewById(R.id.txt5);
+        TextView currentOweYou = findViewById(R.id.txt10);
+        TextView currentYouOwe = findViewById(R.id.txt9);
+        totalOweYou.setText(LoginActivity.user.getTotalOweYou().toString());
+        totalYouOwe.setText(LoginActivity.user.getTotalYouOwe().toString());
+        currentOweYou.setText(LoginActivity.user.getCurrentOweYou().toString());
+        currentYouOwe.setText(LoginActivity.user.getCurrentYouOwe().toString());
+
+
+
         // Perform item selected listener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -29,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
                 switch(item.getItemId())
                 {
-
                     case R.id.home:
                         return true;
                     case R.id.friend:

@@ -21,9 +21,16 @@
             />
         <activity android:name=".Welcome.RegistrationActivity" android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar"/>
-        <activity android:name=".Welcome.LoginActivity" android:exported="false"
+        <activity android:name=".Welcome.LoginActivity" android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar"
-            />
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
         <activity
             android:name=".FriendsList.AddFriendActivity"
@@ -33,6 +40,10 @@
         <activity
             android:name="com.example.YouOweMeProject.AddExpensesActivity"
             android:exported="false" />
+        <activity android:name=".AddExpenses.OweYou"
+            android:exported="false"
+            android:parentActivityName=".AddExpensesActivity"
+            />
         <activity
             android:name="com.example.YouOweMeProject.AddExpenses.AddAmount"
             android:parentActivityName="com.example.YouOweMeProject.AddExpensesActivity" />
@@ -66,11 +77,11 @@
         <activity
             android:name="com.example.YouOweMeProject.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".FriendsList.Friend.SettleUp.Confirmation"

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.MainActivity;
+import com.example.YouOweMeProject.Model.Expense;
 import com.example.YouOweMeProject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -126,20 +128,15 @@ public class RegistrationActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
 
-                        //send user to homeActivity
-                        startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
-
-
                         //I need to create data for firestore
                         Map<String, Object> user = new HashMap<>();
                         user.put("username", username.getText().toString());
                         user.put("email", email.getText().toString());
                         user.put("phone", phone.getText().toString());
-//
-//                        User.setEmail(email.getText().toString());
-//                        User.setUsername(username.getText().toString());
-//                        User.setPhone(phone.getText().toString());
-//                        User.setUuid(fbAuth.getUid());
+                        user.put("totalYouOwe", 0.0);
+                        user.put("totalOweYou", 0.0);
+                        user.put("currentYouOwe", 0.0);
+                        user.put("currentOweYou", 0.0);
 
                         //send data to firestore
                         db.collection("user").document(fbAuth.getUid()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -153,6 +150,25 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Toast.makeText(RegistrationActivity.this, "Adding user failed", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                        //set up shell data base
+                        Map<String, ArrayList<Expense>> expenseModel = new HashMap<>();
+                        expenseModel.put("expense", null);
+
+                        db.collection("expense").document(fbAuth.getUid()).set(expenseModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(RegistrationActivity.this, "Adding expenseModel successful", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(RegistrationActivity.this, "Adding expenseModel Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        //send user to login
+                        startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
 
                     } else{
                         progressDialog.dismiss();

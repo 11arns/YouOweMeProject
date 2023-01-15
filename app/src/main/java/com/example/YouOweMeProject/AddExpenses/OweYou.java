@@ -18,20 +18,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.AddExpenses.Amount.ConfirmationPage;
 import com.example.YouOweMeProject.AddExpensesActivity;
-import com.example.YouOweMeProject.Model.User;
 import com.example.YouOweMeProject.R;
 import com.example.YouOweMeProject.Welcome.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddAmount extends AppCompatActivity {
+public class OweYou extends AppCompatActivity {
     Button btnsave;
     Spinner spinner;
     String [] friend = {"-","Izzati", "Ayu", "Aida", "Ahmad"};
@@ -48,7 +46,7 @@ public class AddAmount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.addexpenses_addamount);
+        setContentView(R.layout.addexpenses_oweyou);
 
 
         fbAuth = FirebaseAuth.getInstance();
@@ -60,7 +58,7 @@ public class AddAmount extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_back);
 
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(AddAmount.this, android.R.layout.simple_spinner_item,friend);
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(OweYou.this, android.R.layout.simple_spinner_item,friend);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -94,39 +92,25 @@ public class AddAmount extends AppCompatActivity {
                 expenseModel.put("chosenName", chosenName);
                 expenseModel.put("amount", amount.getText().toString());
                 expenseModel.put("nameOfExpense", nameOfExpense.getText().toString());
-                expenseModel.put("type", "youOwe");
+                expenseModel.put("type", "oweYou");
 
                 db.collection("expense").document(fbAuth.getUid())
                         .update("expense", FieldValue.arrayUnion(expenseModel)).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                startActivity(new Intent(AddAmount.this, ConfirmationPage.class));
+                                startActivity(new Intent(OweYou.this, ConfirmationPage.class));
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                startActivity(new Intent(AddAmount.this, AddExpensesActivity.class));
-                                Toast.makeText(AddAmount.this, "Adding Expense Failed Try Again", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(OweYou.this, AddExpensesActivity.class));
+                                Toast.makeText(OweYou.this, "Adding Expense Failed Try Again", Toast.LENGTH_SHORT).show();
                             }
                         });
 
-                //get user object and then updated in one push
-//                db.collection("user").document(fbAuth.getUid()).get()
-//                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//
-//                    }
-//                });
-
-                //Update Owe
-                LoginActivity.user.setCurrentYouOwe(LoginActivity.user.getCurrentYouOwe() + Float.parseFloat(amount.getText().toString()));
-                LoginActivity.user.setTotalYouOwe(LoginActivity.user.getTotalYouOwe() + Float.parseFloat(amount.getText().toString()));
+                //Update Owe You
+                LoginActivity.user.setCurrentOweYou(LoginActivity.user.getCurrentOweYou() + Float.parseFloat(amount.getText().toString()));
+                LoginActivity.user.setTotalOweYou(LoginActivity.user.getTotalOweYou() + Float.parseFloat(amount.getText().toString()));
 
 
                 db.collection("user").document(fbAuth.getUid())
@@ -136,4 +120,5 @@ public class AddAmount extends AppCompatActivity {
 
 
     }
+
 }

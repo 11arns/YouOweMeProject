@@ -1,8 +1,11 @@
 package com.example.YouOweMeProject.Welcome;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,9 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.MainActivity;
+import com.example.YouOweMeProject.Model.User;
 import com.example.YouOweMeProject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth fbAuth;
     FirebaseUser myUser;
     FirebaseFirestore db;
+
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,16 +87,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(task.isSuccessful()){
-
                     //get data from user and set it on one big object
                     //one for profile, one for friends list, one for history
-
+                    getData();
 
                     progressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                     //send user to homeActivity
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
                 } else{
                     progressDialog.dismiss();
@@ -98,4 +104,24 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getData(){
+        db.collection("user").document(fbAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                user = documentSnapshot.toObject(User.class);
+                Log.d(TAG, "onSuccess: " + user.getEmail());
+
+                Toast.makeText(LoginActivity.this, "Success Fetching Data", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, "Failed Fetching Data", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+            }
+        });
+    }
+
 }
