@@ -21,6 +21,7 @@ public class Confirmation extends AppCompatActivity {
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.friendslist_friend_settleup_confirmation);
+            getSupportActionBar().hide();
 
             Button Successfull = findViewById(R.id.btnsuccessful);
             Successfull.setOnClickListener(new View.OnClickListener() {

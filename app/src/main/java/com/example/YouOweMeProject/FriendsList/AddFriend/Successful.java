@@ -17,7 +17,7 @@ public class Successful extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friendslist_addfriend_successful);
-
+        getSupportActionBar().hide();
         Button successfulbtn = findViewById(R.id.btnsuccessful);
         successfulbtn.setOnClickListener(new View.OnClickListener() {
             @Override
