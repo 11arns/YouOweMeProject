@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.FriendsList.AddFriendActivity;
-import com.example.YouOweMeProject.FriendsList.FriendActivity;
+
 import com.example.YouOweMeProject.FriendsListActivity;
 import com.example.YouOweMeProject.R;
 
@@ -18,6 +18,7 @@ public class Failed extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friendslist_addfriend_failed);
+        getSupportActionBar().hide();
 
         Button tryagainbtn = findViewById(R.id.btntryagain);
         tryagainbtn.setOnClickListener(new View.OnClickListener() {

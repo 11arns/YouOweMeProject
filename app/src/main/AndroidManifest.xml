@@ -51,7 +51,8 @@
             android:parentActivityName="com.example.YouOweMeProject.AddExpensesActivity" />
         <activity
             android:name="com.example.YouOweMeProject.AddExpenses.Amount.ConfirmationPage"
-            android:parentActivityName="com.example.YouOweMeProject.AddExpenses.AddAmount" />
+            android:parentActivityName="com.example.YouOweMeProject.AddExpenses.AddAmount"
+            />
         <activity
             android:name="com.example.YouOweMeProject.HistoryActivity"
             android:exported="false" />
