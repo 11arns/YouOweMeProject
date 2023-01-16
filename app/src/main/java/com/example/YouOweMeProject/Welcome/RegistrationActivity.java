@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.YouOweMeProject.MainActivity;
 import com.example.YouOweMeProject.Model.Expense;
 import com.example.YouOweMeProject.Model.Friend;
+import com.example.YouOweMeProject.Model.History;
 import com.example.YouOweMeProject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -182,6 +183,12 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Toast.makeText(RegistrationActivity.this, "Adding friendsModel Failed", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                        //set up history
+                        Map<String, ArrayList<History>> historyModel = new HashMap<>();
+                        historyModel.put("historyArr", null);
+
+                        db.collection("history").document(fbAuth.getUid()).set(historyModel);
 
                         //send user to login
                         startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
