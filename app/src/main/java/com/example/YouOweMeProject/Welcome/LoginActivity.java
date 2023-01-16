@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.YouOweMeProject.MainActivity;
 import com.example.YouOweMeProject.Model.Expenses;
 import com.example.YouOweMeProject.Model.Friends;
+import com.example.YouOweMeProject.Model.Histories;
+import com.example.YouOweMeProject.Model.History;
 import com.example.YouOweMeProject.Model.User;
 import com.example.YouOweMeProject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +31,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     EditText email, password;
@@ -42,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     public static User user;
     public static Friends friends;
     public static Expenses expenses;
+    public static Histories histories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +169,20 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Failed Fetching Expense", Toast.LENGTH_SHORT).show();
             }
         });
+
+        //get history
+        db.collection("history").document(fbAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                histories = documentSnapshot.toObject(Histories.class);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
     }
 
 }

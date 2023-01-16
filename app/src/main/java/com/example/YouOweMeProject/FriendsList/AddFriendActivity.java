@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -37,6 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,9 +95,20 @@ public class AddFriendActivity extends AppCompatActivity {
                                                             Log.d(TAG, "friend: " + friend.getUsername());
                                                         }
 
+
                                                         Toast.makeText(AddFriendActivity.this, "Added Friend", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
+
+                                                //update history
+                                                Map<String, Object> historyModel = new HashMap<>();
+                                                historyModel.put("Description",
+                                                        "You Added a Friend " + addFriendName.getText().toString());
+                                                historyModel.put("Date", new Timestamp(new Date()));
+
+                                                db.collection("history").document(fbAuth.getUid())
+                                                                .update("historyArr", FieldValue.arrayUnion(historyModel));
+
 
                                                 startActivity(new Intent(AddFriendActivity.this, Successful.class));
                                             }

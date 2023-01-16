@@ -30,6 +30,7 @@ import com.example.YouOweMeProject.Model.Expense;
 import com.example.YouOweMeProject.Model.Expenses;
 import com.example.YouOweMeProject.Model.Friend;
 import com.example.YouOweMeProject.Model.Friends;
+import com.example.YouOweMeProject.Welcome.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -98,8 +99,7 @@ public class FriendsListActivity extends AppCompatActivity implements SelectList
 
 
         //test
-//        tryToGetDataFromExpense();
-
+        tryToGetDataFromExpense();
 
 
         // Initialize and assign variable
@@ -177,19 +177,7 @@ public class FriendsListActivity extends AppCompatActivity implements SelectList
     }
 
     private void tryToGetDataFromExpense(){
-        db.collection("expense").document(fbAuth.getUid()).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        Log.d(TAG, task.getResult().toObject(Expenses.class).toString());
-
-                        Expenses expenses = task.getResult().toObject(Expenses.class);
-
-                        for(Expense expense: expenses.getExpenses()){
-                            Log.d(TAG, expense.getExpenseTitle());
-                        }
-                    }
-                });
+        Log.d(TAG, "FriendsListActivity: " + LoginActivity.histories.getHistories());
     }
 
 
