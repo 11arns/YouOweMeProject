@@ -8,15 +8,19 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.YouOweMeProject.AddExpenses.AddAmount;
 import com.example.YouOweMeProject.AddExpenses.OweYou;
+import com.example.YouOweMeProject.Welcome.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AddExpensesActivity extends AppCompatActivity {
-
     Button btnyo;
     Button btnoy;
+    LinearLayout linearLayout;
+    TextView hiddenTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,22 @@ public class AddExpensesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //hide if there is no parents
+        linearLayout = findViewById(R.id.linearLayout1);
+        hiddenTextView = findViewById(R.id.empty_view3);
+
+
+        linearLayout.setVisibility(View.GONE);
+        hiddenTextView.setVisibility(View.VISIBLE);
+
+        if(LoginActivity.friends.getFriends() != null){
+            linearLayout.setVisibility(View.VISIBLE);
+            hiddenTextView.setVisibility(View.GONE);
+        }
+
+
+
 
         // Initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);

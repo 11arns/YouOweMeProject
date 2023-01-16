@@ -6,7 +6,6 @@ public class FriendsListModel {
     String debtamount;
     int image;
 
-
     public FriendsListModel(String friendname, String debtstatus, String debtamount, int image) {
         this.friendname = friendname;
         this.debtstatus = debtstatus;

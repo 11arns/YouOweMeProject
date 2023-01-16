@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.MainActivity;
 import com.example.YouOweMeProject.Model.Expense;
+import com.example.YouOweMeProject.Model.Friend;
 import com.example.YouOweMeProject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -153,9 +154,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
                         //set up shell data base
                         Map<String, ArrayList<Expense>> expenseModel = new HashMap<>();
-                        expenseModel.put("expense", null);
+                        expenseModel.put("expenses", null);
 
-                        db.collection("expense").document(fbAuth.getUid()).set(expenseModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        db.collection("expenses").document(fbAuth.getUid()).set(expenseModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(RegistrationActivity.this, "Adding expenseModel successful", Toast.LENGTH_SHORT).show();
@@ -164,6 +165,21 @@ public class RegistrationActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(RegistrationActivity.this, "Adding expenseModel Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        Map<String, ArrayList<Friend>> friendsModel = new HashMap<>();
+                        friendsModel.put("friends", null);
+
+                        db.collection("friends").document(fbAuth.getUid()).set(friendsModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(RegistrationActivity.this, "Adding friendsModel successful", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(RegistrationActivity.this, "Adding friendsModel Failed", Toast.LENGTH_SHORT).show();
                             }
                         });
 

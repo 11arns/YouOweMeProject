@@ -18,16 +18,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.AddExpenses.Amount.ConfirmationPage;
 import com.example.YouOweMeProject.AddExpensesActivity;
+import com.example.YouOweMeProject.Model.Expense;
+import com.example.YouOweMeProject.Model.Expenses;
+import com.example.YouOweMeProject.Model.Friend;
+import com.example.YouOweMeProject.Model.Friends;
 import com.example.YouOweMeProject.Model.User;
 import com.example.YouOweMeProject.R;
 import com.example.YouOweMeProject.Welcome.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +42,11 @@ public class AddAmount extends AppCompatActivity {
     Button btnsave;
     Spinner spinner;
     String [] friend = {"-","Izzati", "Ayu", "Aida", "Ahmad"};
+//    String[] friends = LoginActivity.friends.getFriends();
+    ArrayList<Friend> friends;
+
+    String[] friendList;
+
 
     //Add variable
     EditText amount;
@@ -50,17 +62,30 @@ public class AddAmount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addexpenses_addamount);
 
+        Log.d(TAG, "AddAmount.java: " + friends);
+
+        //add friends
+        friends = LoginActivity.friends.getFriends();
+        friendList = new String[friends.size()];
+
+        int i = 0;
+        for(Friend friend: friends){
+//            friendList.add(friend.getUsername());
+            Log.d(TAG, "Friend: " + friend.getUsername().toString());
+            friendList[i] = friend.getUsername();
+            i++;
+        }
+//        Log.d(TAG, "FriendList: " + friendList.toString());
 
         fbAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
 
         spinner=findViewById(R.id.spinner);
         getSupportActionBar().setTitle("Add Amount");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_back);
 
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(AddAmount.this, android.R.layout.simple_spinner_item,friend);
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(AddAmount.this, android.R.layout.simple_spinner_item,friendList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -80,7 +105,6 @@ public class AddAmount extends AppCompatActivity {
         amount = findViewById(R.id.amount);
         nameOfExpense = findViewById(R.id.expenses);
 
-
         btnsave = (Button)findViewById(R.id.btnsave);
 
         btnsave.setOnClickListener(new View.OnClickListener() {
@@ -96,19 +120,38 @@ public class AddAmount extends AppCompatActivity {
                 expenseModel.put("nameOfExpense", nameOfExpense.getText().toString());
                 expenseModel.put("type", "youOwe");
 
-                db.collection("expense").document(fbAuth.getUid())
-                        .update("expense", FieldValue.arrayUnion(expenseModel)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                startActivity(new Intent(AddAmount.this, ConfirmationPage.class));
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                startActivity(new Intent(AddAmount.this, AddExpensesActivity.class));
-                                Toast.makeText(AddAmount.this, "Adding Expense Failed Try Again", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                db.collection("expenses").document(fbAuth.getUid())
+                        .update("expense", FieldValue.arrayUnion(expenseModel));
+
+                db.collection("expenses").document(fbAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        LoginActivity.expenses.setExpenses(task.getResult().toObject(Expenses.class).getExpenses());
+                        startActivity(new Intent(AddAmount.this, ConfirmationPage.class));
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        startActivity(new Intent(AddAmount.this, AddExpensesActivity.class));
+                        Toast.makeText(AddAmount.this, "Adding Expense Failed Try Again", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+//                db.collection("expense").document(fbAuth.getUid())
+//                        .update("expense", FieldValue.arrayUnion(expenseModel)).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void unused) {
+//                                startActivity(new Intent(AddAmount.this, ConfirmationPage.class));
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                startActivity(new Intent(AddAmount.this, AddExpensesActivity.class));
+//                                Toast.makeText(AddAmount.this, "Adding Expense Failed Try Again", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//
+
 
                 //get user object and then updated in one push
 //                db.collection("user").document(fbAuth.getUid()).get()
@@ -124,13 +167,32 @@ public class AddAmount extends AppCompatActivity {
 //                    }
 //                });
 
-                //Update Owe
+                //Update User data
                 LoginActivity.user.setCurrentYouOwe(LoginActivity.user.getCurrentYouOwe() + Float.parseFloat(amount.getText().toString()));
                 LoginActivity.user.setTotalYouOwe(LoginActivity.user.getTotalYouOwe() + Float.parseFloat(amount.getText().toString()));
 
-
                 db.collection("user").document(fbAuth.getUid())
                         .set(LoginActivity.user);
+
+                //update friends balance data
+//                db.collection("friends").document(fbAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                        for(Friend friend : documentSnapshot.toObject(Friends.class).getFriends()) {
+//                            if(chosenName == friend.getUsername()){
+//                                friend.setBalance(friend.getBalance() - Float.parseFloat(amount.getText().toString()));
+//                            }
+//                        }
+//                    }
+//                });
+
+                for(Friend friend: LoginActivity.friends.getFriends()){
+                    if(friend.getUsername().equals(chosenName)){
+                        friend.setBalance(friend.getBalance() - Float.parseFloat(amount.getText().toString()));
+                    }
+                }
+
+                db.collection("friends").document(fbAuth.getUid()).set(LoginActivity.friends);
             }
         });
 

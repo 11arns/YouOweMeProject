@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.10847628657921292" />
         <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1275" />
         <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/about.xml" value="0.1" />
         <entry key="..\:/Users/asus1/AndroidStudioProjects/BottomNavigationActivity/app/src/main/res/drawable/add_expenses.xml" value="0.1" />
@@ -41,7 +42,16 @@
         <entry key="app/src/main/res/layout/addexpenses_add_amount_confirmation.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/layout/addexpenses_addamount.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/addexpenses_oweyou.xml" value="0.2509057971014493" />
+        <entry key="app/src/main/res/layout/friend_recyclerviewrow.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/friendslist.xml" value="0.13796296296296295" />
+        <entry key="app/src/main/res/layout/friendslist_addfriend.xml" value="0.13796296296296295" />
+        <entry key="app/src/main/res/layout/friendslist_addfriend_failed.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/friendslist_addfriend_successful.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/friendslist_card_row.xml" value="0.30885416666666665" />
+        <entry key="app/src/main/res/layout/friendslist_friend.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/friendslist_friend_settleup.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/friendslist_friend_settleup_confirmation.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/friendslist_recyclerviewrow.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/main.xml" value="0.2826086956521739" />
         <entry key="app/src/main/res/layout/settings.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/settings_profile.xml" value="0.2509057971014493" />

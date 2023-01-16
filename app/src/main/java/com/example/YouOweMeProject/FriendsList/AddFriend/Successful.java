@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.FriendsList.Friend.SettleUpActivity;
 import com.example.YouOweMeProject.FriendsList.FriendActivity;
+import com.example.YouOweMeProject.FriendsListActivity;
 import com.example.YouOweMeProject.R;
 
 public class Successful extends AppCompatActivity {
@@ -22,7 +23,7 @@ public class Successful extends AppCompatActivity {
         successfulbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Successful.this, FriendActivity.class);
+                Intent intent = new Intent(Successful.this, FriendsListActivity.class);
                 startActivity(intent);
             }
         });

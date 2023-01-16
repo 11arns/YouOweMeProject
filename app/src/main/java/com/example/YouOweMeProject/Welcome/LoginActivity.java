@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.MainActivity;
+import com.example.YouOweMeProject.Model.Expenses;
+import com.example.YouOweMeProject.Model.Friends;
 import com.example.YouOweMeProject.Model.User;
 import com.example.YouOweMeProject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseFirestore db;
 
     public static User user;
+    public static Friends friends;
+    public static Expenses expenses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +85,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.show();
 
         fbAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -106,20 +108,60 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void getData(){
+        //get user data
         db.collection("user").document(fbAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 user = documentSnapshot.toObject(User.class);
                 Log.d(TAG, "onSuccess: " + user.getEmail());
 
-                Toast.makeText(LoginActivity.this, "Success Fetching Data", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                Toast.makeText(LoginActivity.this, "Success Fetching User", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginActivity.this, "Failed Fetching Data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Failed Fetching User", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+            }
+        });
+
+        //get friends data
+        db.collection("friends").document(fbAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                friends = documentSnapshot.toObject(Friends.class);
+
+                Toast.makeText(LoginActivity.this, "Success Fetching Friends", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                //test
+                Log.d(TAG, "Existed on Login?(friends) :) " + documentSnapshot.toObject(Friends.class).getFriends());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, "Failed Fetching Friends", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+            }
+        });
+
+        //get expenses data
+        db.collection("expenses").document(fbAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                expenses = documentSnapshot.toObject(Expenses.class);
+
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                Toast.makeText(LoginActivity.this, "Success Fetching Expenses", Toast.LENGTH_SHORT).show();
+
+                //test
+                Log.d(TAG, "Existed on Login? :) " + documentSnapshot.toObject(Expenses.class).getExpenses());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, "Failed Fetching Expense", Toast.LENGTH_SHORT).show();
             }
         });
     }
