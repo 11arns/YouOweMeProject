@@ -1,14 +1,17 @@
 package com.example.YouOweMeProject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +20,12 @@ import com.example.YouOweMeProject.Settings.PrivacyActivity;
 import com.example.YouOweMeProject.Settings.AboutUsActivity;
 
 import com.example.YouOweMeProject.Welcome.LoginActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -28,6 +35,10 @@ public class SettingsActivity extends AppCompatActivity {
     Button ProfileButton;
     Button PrivacyButton;
     Button AboutUsButton;
+    FirebaseAuth fAuth;
+    Button editImageButton;
+    ImageView profilePic;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +50,18 @@ public class SettingsActivity extends AppCompatActivity {
         TextView settingsActivityUsernameDisplay = findViewById(R.id.Username);
         settingsActivityUsernameDisplay.setText(LoginActivity.user.getUsername());
 
+        profilePic = findViewById(R.id.profileImg);
+        editImageButton = findViewById(R.id.editImageButton);
+
+        fAuth = FirebaseAuth.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>(){
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profilePic);
+            }
+        });
 
         ProfileButton = (Button) findViewById(R.id.ProfileButton);
         ProfileButton.setOnClickListener(new View.OnClickListener() {
