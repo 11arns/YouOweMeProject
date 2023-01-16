@@ -4,16 +4,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.YouOweMeProject.Adapter.SelectListener;
 import com.example.YouOweMeProject.R;
 
 import java.util.ArrayList;
 
 public class friend_recyclerviewadapter extends RecyclerView.Adapter<friend_recyclerviewadapter.MyViewHolder> {
-
    Context context;
    ArrayList<friendmodel> friendmodels;
 
@@ -43,8 +46,8 @@ public class friend_recyclerviewadapter extends RecyclerView.Adapter<friend_recy
         return friendmodels.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
 
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView name, status, amount;
 
         public MyViewHolder(View itemView){
@@ -53,6 +56,6 @@ public class friend_recyclerviewadapter extends RecyclerView.Adapter<friend_recy
             name = itemView.findViewById(R.id.expensenameTV);
             status = itemView.findViewById(R.id.expensestatusTV);
             amount = itemView.findViewById(R.id.expenseamountTV);
-        }
+        };
     }
 }

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.AddExpenses.Amount.ConfirmationPage;
 import com.example.YouOweMeProject.AddExpensesActivity;
+import com.example.YouOweMeProject.Model.Friend;
 import com.example.YouOweMeProject.R;
 import com.example.YouOweMeProject.Welcome.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +40,10 @@ public class OweYou extends AppCompatActivity {
     EditText amount;
     EditText nameOfExpense;
     String chosenName;
+
+    ArrayList<Friend> friends;
+
+    String[] friendList;
 
     FirebaseAuth fbAuth;
     FirebaseFirestore db;
@@ -52,13 +58,24 @@ public class OweYou extends AppCompatActivity {
         fbAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        friends = LoginActivity.friends.getFriends();
+        friendList = new String[friends.size()];
+
+        int i = 0;
+        for(Friend friend: friends){
+//            friendList.add(friend.getUsername());
+            Log.d(TAG, "Friend: " + friend.getUsername().toString());
+            friendList[i] = friend.getUsername();
+            i++;
+        }
+
 
         spinner=findViewById(R.id.spinner);
         getSupportActionBar().setTitle("Add Amount");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_back);
 
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(OweYou.this, android.R.layout.simple_spinner_item,friend);
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(OweYou.this, android.R.layout.simple_spinner_item,friendList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -115,6 +132,14 @@ public class OweYou extends AppCompatActivity {
 
                 db.collection("user").document(fbAuth.getUid())
                         .set(LoginActivity.user);
+
+                for(Friend friend: LoginActivity.friends.getFriends()){
+                    if(friend.getUsername().equals(chosenName)){
+                        friend.setBalance(friend.getBalance() + Float.parseFloat(amount.getText().toString()));
+                    }
+                }
+
+                db.collection("friends").document(fbAuth.getUid()).set(LoginActivity.friends);
             }
         });
 

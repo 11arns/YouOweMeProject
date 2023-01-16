@@ -8,6 +8,7 @@
     tools:context=".AddExpensesActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -37,6 +38,18 @@
             app:cornerRadius="20dp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/empty_view3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Add friend first"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

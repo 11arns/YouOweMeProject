@@ -1,31 +1,61 @@
 package com.example.YouOweMeProject;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.YouOweMeProject.Adapter.MyFriendsListAdapter;
+import com.example.YouOweMeProject.Adapter.SelectListener;
 import com.example.YouOweMeProject.FriendsList.AddFriendActivity;
 import com.example.YouOweMeProject.FriendsList.Friend.SettleUpActivity;
 import com.example.YouOweMeProject.FriendsList.FriendActivity;
 import com.example.YouOweMeProject.FriendsList.FriendsListInterface;
 import com.example.YouOweMeProject.FriendsList.FriendsListModel;
 import com.example.YouOweMeProject.FriendsList.Friendslist_RecyclerViewAdapter;
+import com.example.YouOweMeProject.Model.Expense;
+import com.example.YouOweMeProject.Model.Expenses;
+import com.example.YouOweMeProject.Model.Friend;
+import com.example.YouOweMeProject.Model.Friends;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class FriendsListActivity extends AppCompatActivity implements FriendsListInterface {
+public class FriendsListActivity extends AppCompatActivity implements SelectListener {
+//    ArrayList<FriendsListModel> FriendListModels = new ArrayList<>();
+//    int[] friendimage = {R.drawable.aida, R.drawable.ayu, R.drawable.ain};
 
+    ArrayList<Friend> list;
+    RecyclerView recyclerView;
+    MyFriendsListAdapter myAdapter;
+    TextView emptyView;
 
-    ArrayList<FriendsListModel> FriendListModels = new ArrayList<>();
-    int[] friendimage = {R.drawable.aida, R.drawable.ayu, R.drawable.ain};
+    //Firebase
+    FirebaseFirestore db;
+    FirebaseAuth fbAuth;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +63,43 @@ public class FriendsListActivity extends AppCompatActivity implements FriendsLis
         setContentView(R.layout.friendslist);
 
         //friends list recycler view
-        RecyclerView recyclerView = findViewById(R.id.friendslist_recyclerview);
-        setupfriendslistmodel();
-        Friendslist_RecyclerViewAdapter adapter = new Friendslist_RecyclerViewAdapter(this
-                , FriendListModels, this);
-        recyclerView.setAdapter(adapter);
+//        RecyclerView recyclerView = findViewById(R.id.friendslist_recyclerview);
+//        setupfriendslistmodel();
+//        Friendslist_RecyclerViewAdapter adapter = new Friendslist_RecyclerViewAdapter(this
+//                ,FriendListModels ,this);
+//
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Fetching Data...");
+        progressDialog.show();
+
+        recyclerView = findViewById(R.id.friendslist_recyclerview);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        emptyView = findViewById(R.id.empty_view);
+
+        fbAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        list = new ArrayList<Friend>();
+        myAdapter = new MyFriendsListAdapter(FriendsListActivity.this, list, this);
+
+        recyclerView.setAdapter(myAdapter);
+
+        recyclerView.setVisibility(View.GONE);
+        emptyView.setVisibility(View.VISIBLE);
+
+        //important for getting data
+        EventChangeListener();
+
+
+        //test
+//        tryToGetDataFromExpense();
+
 
 
         // Initialize and assign variable
@@ -85,30 +146,59 @@ public class FriendsListActivity extends AppCompatActivity implements FriendsLis
                 startActivity(intent);
             }
         });
-
-
     }
 
+    private void EventChangeListener(){
+        DocumentReference docRef = db.collection("friends").document(fbAuth.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.getResult().toObject(Friends.class).getFriends() != null){
 
-    private void setupfriendslistmodel(){
-        String[] name = getResources().getStringArray(R.array.friendname);
-        String[] debtstatus = getResources().getStringArray(R.array.debtstatus);
-        String[] debtamount = getResources().getStringArray(R.array.debtamount);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    emptyView.setVisibility(View.GONE);
 
-        for(int i=0; i< name.length; i++ ){
-            FriendListModels.add(new FriendsListModel(name[i],debtstatus[i],debtamount[i], friendimage[i] ));
-        }
+                    for(Friend friend :task.getResult().toObject(Friends.class).getFriends()){
+                        Log.d(TAG, "The issues is here: " + friend.getUsername());
+
+                        list.add(friend);
+
+                        progressDialog.dismiss();
+
+                        myAdapter.notifyDataSetChanged();
+
+                        Log.d(TAG, "On Success: " + friend.getUsername());
+                    }
+                } else{
+                    progressDialog.dismiss();
+                }
+            }
+        });
     }
+
+    private void tryToGetDataFromExpense(){
+        db.collection("expense").document(fbAuth.getUid()).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        Log.d(TAG, task.getResult().toObject(Expenses.class).toString());
+
+                        Expenses expenses = task.getResult().toObject(Expenses.class);
+
+                        for(Expense expense: expenses.getExpenses()){
+                            Log.d(TAG, expense.getExpenseTitle());
+                        }
+                    }
+                });
+    }
+
 
     @Override
-    public void onitemclick(int position) {
-        Intent intent = new Intent( FriendsListActivity.this, FriendActivity.class);
-        intent.putExtra("Friend Name", FriendListModels.get(position).getFriendname());
-        intent.putExtra("Debt Status", FriendListModels.get(position).getDebtstatus());
-        intent.putExtra("Debt Amount", FriendListModels.get(position).getDebtamount());
-        intent.putExtra("Image", FriendListModels.get(position).getImage());
+    public void onItemClicked(Friend myFriendsListAdapter) {
+        Toast.makeText(this, myFriendsListAdapter.getUsername(), Toast.LENGTH_SHORT).show();
 
+        Intent intent = new Intent(FriendsListActivity.this, FriendActivity.class);
+        intent.putExtra("friendName", myFriendsListAdapter.getUsername());
         startActivity(intent);
-
     }
 }

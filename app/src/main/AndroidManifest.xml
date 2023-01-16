@@ -37,6 +37,8 @@
             android:parentActivityName=".FriendsListActivity"
             android:exported="false">
         </activity>
+        <activity android:name=".FriendsList.AddFriend.Failed" android:exported="false"/>
+        <activity android:name=".FriendsList.AddFriend.Successful" android:exported="false"/>
         <activity
             android:name="com.example.YouOweMeProject.AddExpensesActivity"
             android:exported="false" />
