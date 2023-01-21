@@ -112,21 +112,16 @@ public class OweYou extends AppCompatActivity {
 
                 Map<String, Object> expenseModel = new HashMap<>();
                 expenseModel.put("chosenName", chosenName);
-                expenseModel.put("amount", amount.getText().toString());
+                expenseModel.put("amount", Float.parseFloat(amount.getText().toString()));
                 expenseModel.put("nameOfExpense", nameOfExpense.getText().toString());
                 expenseModel.put("type", "oweYou");
 
-                db.collection("expense").document(fbAuth.getUid())
-                        .update("expense", FieldValue.arrayUnion(expenseModel)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("expenses").document(fbAuth.getUid()).collection("expenses")
+                        .add(expenseModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                             @Override
-                            public void onSuccess(Void unused) {
+                            public void onComplete(@NonNull Task<DocumentReference> task) {
                                 startActivity(new Intent(OweYou.this, ConfirmationPage.class));
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                startActivity(new Intent(OweYou.this, AddExpensesActivity.class));
-                                Toast.makeText(OweYou.this, "Adding Expense Failed Try Again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OweYou.this, "Added Expense", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -138,6 +133,8 @@ public class OweYou extends AppCompatActivity {
                 db.collection("user").document(fbAuth.getUid())
                         .set(LoginActivity.user);
 
+
+                //friend
                 for(Friend friend: LoginActivity.friends.getFriends()){
                     if(friend.getUsername().equals(chosenName)){
                         friend.setBalance(friend.getBalance() + Float.parseFloat(amount.getText().toString()));
