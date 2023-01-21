@@ -2,15 +2,15 @@ package com.example.YouOweMeProject.Model;
 
 public class Expense {
     Float amount;
-    String expenseTitle, friend, type;
+    String nameOfExpense, chosenName, type;
 
     public Expense() {
     }
 
-    public Expense(Float amount, String expenseTitle, String friend, String type) {
+    public Expense(Float amount, String nameOfExpense, String chosenName, String type) {
         this.amount = amount;
-        this.expenseTitle = expenseTitle;
-        this.friend = friend;
+        this.nameOfExpense = nameOfExpense;
+        this.chosenName = chosenName;
         this.type = type;
     }
 
@@ -22,27 +22,27 @@ public class Expense {
         this.amount = amount;
     }
 
-    public String getExpenseTitle() {
-        return expenseTitle;
-    }
-
-    public void setExpenseTitle(String expenseTitle) {
-        this.expenseTitle = expenseTitle;
-    }
-
-    public String getFriend() {
-        return friend;
-    }
-
-    public void setFriend(String friend) {
-        this.friend = friend;
-    }
-
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getNameOfExpense() {
+        return nameOfExpense;
+    }
+
+    public void setNameOfExpense(String nameOfExpense) {
+        this.nameOfExpense = nameOfExpense;
+    }
+
+    public String getChosenName() {
+        return chosenName;
+    }
+
+    public void setChosenName(String chosenName) {
+        this.chosenName = chosenName;
     }
 }

@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -142,37 +143,51 @@ public class FriendActivity extends AppCompatActivity {
 //            }
 //        });
 
-        Log.d(TAG, "Existed: " + LoginActivity.expenses.getExpenses());
+//        Log.d(TAG, "Existed: " + LoginActivity.expenses.getExpenses());
+//
+////        LoginActivity.expenses.getExpenses();
+//        if(LoginActivity.expenses.getExpenses() != null){
+//            for(Expense expense: LoginActivity.expenses.getExpenses()){
+//                if(expense.getFriend().equals(getIntent().getStringExtra("friendName"))){
+//                    listOfExpense.add(expense);
+//
+//                    Log.d(TAG, "FriendActivity: " + expense.getExpenseTitle());
+//
+//                    myAdapter.notifyDataSetChanged();
+//                }
+//            }
+//
+//            settleAll.setVisibility(View.VISIBLE);
+//            recyclerView.setVisibility(View.VISIBLE);
+//            emptyView.setVisibility(View.GONE);
+//        } else {
+//            Toast.makeText(FriendActivity.this, "Failed Fetching expense", Toast.LENGTH_SHORT).show();
+//        }
 
-//        LoginActivity.expenses.getExpenses();
-        if(LoginActivity.expenses.getExpenses() != null){
-            for(Expense expense: LoginActivity.expenses.getExpenses()){
-                if(expense.getFriend().equals(getIntent().getStringExtra("friendName"))){
-                    listOfExpense.add(expense);
+        db.collection("expenses").document(fbAuth.getUid()).collection("expenses")
+                .whereEqualTo("chosenName", getIntent().getStringExtra("chosenName"))
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            if(!task.getResult().isEmpty()){
+                                for(DocumentSnapshot documentSnapshot: task.getResult().getDocuments()){
+                                    Expense expense = documentSnapshot.toObject(Expense.class);
+                                    listOfExpense.add(expense);
 
-                    Log.d(TAG, "FriendActivity: " + expense.getExpenseTitle());
+                                    Log.d(TAG, "onComplete: " + expense.getNameOfExpense());
 
-                    myAdapter.notifyDataSetChanged();
-                }
-            }
+                                    myAdapter.notifyDataSetChanged();
+                                }
+                                settleAll.setVisibility(View.VISIBLE);
+                                recyclerView.setVisibility(View.VISIBLE);
+                                emptyView.setVisibility(View.GONE);
+                            }
+                        }
 
-            settleAll.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
-        } else {
-            Toast.makeText(FriendActivity.this, "Failed Fetching expense", Toast.LENGTH_SHORT).show();
-        }
+                    }
+                });
 
     }
 
-
-//    private void setUpFriendModel(){
-//        String[]  expensenameTV= getResources().getStringArray(R.array.expensename);
-//        String[]  expenseamountTV= getResources().getStringArray(R.array.expenseamount);
-//        String[]  expensestatusTV= getResources().getStringArray(R.array.expensestatus);
-//
-//        for (int i=0; i<expensenameTV.length; i++){
-//            friendmodels.add(new friendmodel(expensenameTV[i], expensestatusTV[i], expenseamountTV[i]));
-//        }
-//    }
 }

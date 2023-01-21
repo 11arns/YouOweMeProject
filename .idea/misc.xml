@@ -57,6 +57,7 @@
         <entry key="app/src/main/res/layout/main.xml" value="0.2826086956521739" />
         <entry key="app/src/main/res/layout/settings.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/settings_profile.xml" value="0.2509057971014493" />
+        <entry key="app/src/main/res/layout/settings_profile_editprofile.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/welcome.xml" value="0.1" />
         <entry key="app/src/main/res/layout/welcome_login.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/welcome_registration.xml" value="0.2509057971014493" />

@@ -183,10 +183,10 @@ public class FriendsListActivity extends AppCompatActivity implements SelectList
 
     @Override
     public void onItemClicked(Friend myFriendsListAdapter) {
-        Toast.makeText(this, myFriendsListAdapter.getUsername(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, myFriendsListAdapter.getUsername(), Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(FriendsListActivity.this, FriendActivity.class);
-        intent.putExtra("friendName", myFriendsListAdapter.getUsername());
+        intent.putExtra("chosenName", myFriendsListAdapter.getUsername());
         startActivity(intent);
     }
 }

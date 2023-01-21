@@ -37,7 +37,7 @@ public class MyFriendAdapter extends RecyclerView.Adapter<MyFriendAdapter.MyView
         Expense expense = listOfExpense.get(position);
 
         holder.amount.setText(expense.getAmount().toString());
-        holder.nameOfExpense.setText(expense.getFriend());
+        holder.nameOfExpense.setText(expense.getNameOfExpense());
         holder.type.setText(expense.getType());
     }
 
