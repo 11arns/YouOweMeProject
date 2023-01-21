@@ -11,6 +11,7 @@
     android:background="@drawable/bgprofile"
     tools:context=".Settings.Profile.EditProfileActivity">
 
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -60,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity{
         profileActivityEmailBoxDisplay.setText(LoginActivity.user.getEmail());
         profileActivityPhoneBoxDisplay.setText(LoginActivity.user.getPhone());
 
+
         editProfileBtn = (Button)findViewById(R.id.editButton);
 
         editProfileBtn.setOnClickListener(new View.OnClickListener() {
