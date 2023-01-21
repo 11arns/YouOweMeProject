@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -118,26 +119,35 @@ public class AddAmount extends AppCompatActivity {
 
                 Map<String, Object> expenseModel = new HashMap<>();
                 expenseModel.put("chosenName", chosenName);
-                expenseModel.put("amount", amount.getText().toString());
+                expenseModel.put("amount", Float.parseFloat(amount.getText().toString()));
                 expenseModel.put("nameOfExpense", nameOfExpense.getText().toString());
                 expenseModel.put("type", "youOwe");
 
-                db.collection("expenses").document(fbAuth.getUid())
-                        .update("expense", FieldValue.arrayUnion(expenseModel));
+//                db.collection("expenses").document(fbAuth.getUid())
+//                        .update("expense", FieldValue.arrayUnion(expenseModel));
+//
+//                db.collection("expenses").document(fbAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        LoginActivity.expenses.setExpenses(task.getResult().toObject(Expenses.class).getExpenses());
+//                        startActivity(new Intent(AddAmount.this, ConfirmationPage.class));
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        startActivity(new Intent(AddAmount.this, AddExpensesActivity.class));
+//                        Toast.makeText(AddAmount.this, "Adding Expense Failed Try Again", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
-                db.collection("expenses").document(fbAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        LoginActivity.expenses.setExpenses(task.getResult().toObject(Expenses.class).getExpenses());
-                        startActivity(new Intent(AddAmount.this, ConfirmationPage.class));
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        startActivity(new Intent(AddAmount.this, AddExpensesActivity.class));
-                        Toast.makeText(AddAmount.this, "Adding Expense Failed Try Again", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                db.collection("expenses").document(fbAuth.getUid()).collection("expenses")
+                        .add(expenseModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                startActivity(new Intent(AddAmount.this, ConfirmationPage.class));
+                                Toast.makeText(AddAmount.this, "Added Expense", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
 //                db.collection("expense").document(fbAuth.getUid())
 //                        .update("expense", FieldValue.arrayUnion(expenseModel)).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -196,14 +206,27 @@ public class AddAmount extends AppCompatActivity {
 
                 db.collection("friends").document(fbAuth.getUid()).set(LoginActivity.friends);
 
-                //update history
-                Map<String, Object> historyModel = new HashMap<>();
-                historyModel.put("Description",
-                        "You Owe RM" + amount.getText().toString() + " to " + chosenName);
-                historyModel.put("Date", new Timestamp(new Date()));
+//                //update history
+//                Map<String, Object> historyModel = new HashMap<>();
+//                historyModel.put("Description",
+//                        "You Owe RM" + amount.getText().toString() + " to " + chosenName);
+//                historyModel.put("Date", new Timestamp(new Date()));
+//
+//                db.collection("history").document(fbAuth.getUid())
+//                        .update("historyArr", FieldValue.arrayUnion(historyModel));
 
-                db.collection("history").document(fbAuth.getUid())
-                        .update("historyArr", FieldValue.arrayUnion(historyModel));
+                //set new history
+                Map<String, Object> newHistoryModel = new HashMap<>();
+                newHistoryModel.put("date", new Timestamp(new Date()));
+                newHistoryModel.put("description", "You owe " + chosenName + " RM" +  amount.getText().toString());
+
+                db.collection("histories").document(fbAuth.getUid()).collection("history")
+                        .add(newHistoryModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                Toast.makeText(AddAmount.this, "You added histories", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 

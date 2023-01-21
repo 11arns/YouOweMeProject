@@ -20,12 +20,14 @@ import com.example.YouOweMeProject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText username, email, phone, password, passwordConfirmation;
     Button btnRegistration;
     String emailPattern = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+    String phonePattern= "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$";
     ProgressDialog progressDialog;
 
     FirebaseAuth fbAuth;
@@ -113,6 +116,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private void PerformAuth(){
         if(!email.getText().toString().matches(emailPattern)){
             email.setError("Enter correct Email");
+        } else if(!phone.getText().toString().matches(phonePattern)){
+          phone.setError("Phone format is wrong");
         } else if(password.getText().toString().isEmpty() || password.getText().toString().length() < 6){
             password.setError("Enter Proper Password");
         } else if (!password.getText().toString().equals(passwordConfirmation.getText().toString())){
@@ -192,6 +197,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                         //send user to login
                         startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+
 
                     } else{
                         progressDialog.dismiss();

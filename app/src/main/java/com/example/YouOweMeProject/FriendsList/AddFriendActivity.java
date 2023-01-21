@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 
+import com.example.YouOweMeProject.AddExpenses.AddAmount;
 import com.example.YouOweMeProject.FriendsList.AddFriend.Failed;
 import com.example.YouOweMeProject.FriendsList.AddFriend.Successful;
 import com.example.YouOweMeProject.Model.Expense;
@@ -24,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -100,14 +102,18 @@ public class AddFriendActivity extends AppCompatActivity {
                                                     }
                                                 });
 
-                                                //update history
-                                                Map<String, Object> historyModel = new HashMap<>();
-                                                historyModel.put("Description",
-                                                        "You Added a Friend " + addFriendName.getText().toString());
-                                                historyModel.put("Date", new Timestamp(new Date()));
+                                                //set new history
+                                                Map<String, Object> newHistoryModel = new HashMap<>();
+                                                newHistoryModel.put("date", new Timestamp(new Date()));
+                                                newHistoryModel.put("description", "You added new friend, " + document.toObject(User.class).getUsername());
 
-                                                db.collection("history").document(fbAuth.getUid())
-                                                                .update("historyArr", FieldValue.arrayUnion(historyModel));
+                                                db.collection("histories").document(fbAuth.getUid()).collection("history")
+                                                        .add(newHistoryModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                                Toast.makeText(AddFriendActivity.this, "You added histories", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
 
 
                                                 startActivity(new Intent(AddFriendActivity.this, Successful.class));

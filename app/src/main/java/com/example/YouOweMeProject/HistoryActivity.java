@@ -14,12 +14,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.YouOweMeProject.Adapter.MyFriendsListAdapter;
 import com.example.YouOweMeProject.Adapter.MyHisotryAdapter;
-import com.example.YouOweMeProject.Model.Friend;
-import com.example.YouOweMeProject.Model.Friends;
 import com.example.YouOweMeProject.Model.Histories;
 import com.example.YouOweMeProject.Model.History;
 import com.example.YouOweMeProject.Welcome.LoginActivity;
@@ -32,11 +28,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class HistoryActivity extends AppCompatActivity {
-
     ArrayList<History> listOfHistory;
     RecyclerView recyclerView;
     MyHisotryAdapter myAdapter;
@@ -91,7 +90,6 @@ public class HistoryActivity extends AppCompatActivity {
 
                 switch(item.getItemId())
                 {
-
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         overridePendingTransition(0,0);
@@ -117,27 +115,48 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void EventChangeListener(){
-        db.collection("history").document(fbAuth.getUid())
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//        DocumentReference docRef = db.collection("history").document(fbAuth.getUid());
+//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if(task.getResult().toObject(Histories.class).getHistories() != null){
+//                    recyclerView.setVisibility(View.VISIBLE);
+//                    emptyView.setVisibility(View.GONE);
+//
+//                    for(History history: task.getResult().toObject(Histories.class).getHistories()){
+//                        listOfHistory.add(history);
+//                        progressDialog.dismiss();
+//
+//                        myAdapter.notifyDataSetChanged();
+//                    }
+//                }else{
+//                    progressDialog.dismiss();
+//                }
+//            }
+//        });
+        db.collection("histories").document(fbAuth.getUid())
+                .collection("history").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.getResult().toObject(Histories.class).getHistories() != null){
-                            recyclerView.setVisibility(View.VISIBLE);
-                            emptyView.setVisibility(View.GONE);
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            if(!task.getResult().isEmpty()) {
+                                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
-                            for(History history :task.getResult().toObject(Histories.class).getHistories()){
-                                Log.d(TAG, "The issues is here: " + history.getDescription());
+                                    History history = documentSnapshot.toObject(History.class);
+                                    listOfHistory.add(history);
 
-                                listOfHistory.add(history);
+                                    Log.d(TAG, "onComplete: " + history.getDate().toString());
 
-                                myAdapter.notifyDataSetChanged();
-                                progressDialog.dismiss();
+                                    myAdapter.notifyDataSetChanged();
+                                }
+                                recyclerView.setVisibility(View.VISIBLE);
+                                emptyView.setVisibility(View.GONE);
+                                Log.d(TAG, "onComplete: " + " hello form con");
                             }
-                        } else{
-                            Toast.makeText(HistoryActivity.this, "No history", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
                     }
                 });
     }
+
 }

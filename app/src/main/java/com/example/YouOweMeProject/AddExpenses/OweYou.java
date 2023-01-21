@@ -21,10 +21,13 @@ import com.example.YouOweMeProject.AddExpensesActivity;
 import com.example.YouOweMeProject.Model.Friend;
 import com.example.YouOweMeProject.R;
 import com.example.YouOweMeProject.Welcome.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -143,14 +146,18 @@ public class OweYou extends AppCompatActivity {
 
                 db.collection("friends").document(fbAuth.getUid()).set(LoginActivity.friends);
 
-                //update history
-                Map<String, Object> historyModel = new HashMap<>();
-                historyModel.put("Description",
-                        chosenName + " Owe You RM" + amount.getText().toString());
-                historyModel.put("Date", new Timestamp(new Date()));
+                //set new history
+                Map<String, Object> newHistoryModel = new HashMap<>();
+                newHistoryModel.put("date", new Timestamp(new Date()));
+                newHistoryModel.put("description", chosenName + " owes you " +" RM" +  amount.getText().toString());
 
-                db.collection("history").document(fbAuth.getUid())
-                        .update("historyArr", FieldValue.arrayUnion(historyModel));
+                db.collection("histories").document(fbAuth.getUid()).collection("history")
+                        .add(newHistoryModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                Toast.makeText(OweYou.this, "You added histories", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 

@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText email, password;
     Button btnLogin;
     ProgressDialog progressDialog;
+    String emailPattern = "/^\\S+@\\S+\\.\\S+$/\n";
 
     FirebaseAuth fbAuth;
     FirebaseUser myUser;
@@ -84,32 +85,36 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void PerformAuth() {
-        progressDialog.setMessage("Please wait while login...");
-        progressDialog.setTitle("Login");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
+        if(email.getText().toString().matches(emailPattern)){
+            email.setError("Email format not accepted");
+        }else {
+            progressDialog.setMessage("Please wait while login...");
+            progressDialog.setTitle("Login");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
 
-        fbAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            fbAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if(task.isSuccessful()){
-                    //get data from user and set it on one big object
-                    //one for profile, one for friends list, one for history
-                    getData();
+                    if (task.isSuccessful()) {
+                        //get data from user and set it on one big object
+                        //one for profile, one for friends list, one for history
+                        getData();
 
-                    progressDialog.dismiss();
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                    //send user to homeActivity
+                        //send user to homeActivity
 //                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
-                } else{
-                    progressDialog.dismiss();
-                    Toast.makeText(LoginActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        progressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     private void getData(){

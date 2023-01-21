@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.YouOweMeProject.AddExpenses.AddAmount;
+import com.example.YouOweMeProject.FriendsListActivity;
 import com.example.YouOweMeProject.MainActivity;
 import com.example.YouOweMeProject.R;
 
@@ -25,7 +26,7 @@ public class ConfirmationPage extends AppCompatActivity {
         btndone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (ConfirmationPage.this, MainActivity.class);
+                Intent intent = new Intent (ConfirmationPage.this, FriendsListActivity.class);
                 startActivity(intent);
             }
         });
