@@ -82,20 +82,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/SettleAllButton"
-        android:layout_width="239dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="@color/purple"
-        android:gravity="center"
-        android:text="SETTLE ALL"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friend_recyclerview"

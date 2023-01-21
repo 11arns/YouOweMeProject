@@ -48,7 +48,7 @@ public class FriendActivity extends AppCompatActivity {
 
     //need to disable these button and show text when there are no item
     TextView emptyView;
-    Button settleAll;
+    //Button settleAll;
     ConstraintLayout constraintLayout;
 
     //Firebase
@@ -95,11 +95,11 @@ public class FriendActivity extends AppCompatActivity {
 
         //hide and show what need to be display
         emptyView = findViewById(R.id.empty_view2);
-        settleAll = findViewById(R.id.SettleAllButton);
+        //settleAll = findViewById(R.id.SettleAllButton);
         constraintLayout = findViewById(R.id.constraintLayout);
 
         recyclerView.setVisibility(View.GONE);
-        settleAll.setVisibility(View.GONE);
+       // settleAll.setVisibility(View.GONE);
         emptyView.setVisibility(View.VISIBLE);
         constraintLayout.setVisibility(View.GONE);
 
@@ -111,14 +111,14 @@ public class FriendActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_back);
 
-        Button SettleAllButton = findViewById(R.id.SettleAllButton);
+       /* Button SettleAllButton = findViewById(R.id.SettleAllButton);
         SettleAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FriendActivity.this, SettleUpActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     private void EventChangeListener(){
@@ -179,7 +179,7 @@ public class FriendActivity extends AppCompatActivity {
 
                                     myAdapter.notifyDataSetChanged();
                                 }
-                                settleAll.setVisibility(View.VISIBLE);
+                                //settleAll.setVisibility(View.VISIBLE);
                                 recyclerView.setVisibility(View.VISIBLE);
                                 emptyView.setVisibility(View.GONE);
                             }
