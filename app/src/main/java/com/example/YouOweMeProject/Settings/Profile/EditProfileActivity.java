@@ -44,7 +44,6 @@ public class EditProfileActivity extends AppCompatActivity {
         //select the editText
         username = findViewById(R.id.edit_username);
         phone = findViewById(R.id.editPhone);
-        email = findViewById(R.id.editEmail);
 
         //FB setup
         fbAuth = FirebaseAuth.getInstance();
