@@ -115,48 +115,6 @@ public class FriendActivity extends AppCompatActivity implements SelectListenerE
     }
 
     private void EventChangeListener(){
-//        DocumentReference docRef = db.collection("expense").document(fbAuth.getUid());
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if(task.getResult().toObject(Expenses.class).getExpenses() != null){
-//                    settleAll.setVisibility(View.VISIBLE);
-//                    recyclerView.setVisibility(View.VISIBLE);
-//                    emptyView.setVisibility(View.GONE);
-//
-//                    for(Expense expense: task.getResult().toObject(Expenses.class).getExpenses()){
-//
-////                        if(expense.getFriend())
-//                    }
-//
-//                } else{
-////                    progressDialog.dismiss();
-//                    Toast.makeText(FriendActivity.this, "Failed Fetching expense", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-
-//        Log.d(TAG, "Existed: " + LoginActivity.expenses.getExpenses());
-//
-////        LoginActivity.expenses.getExpenses();
-//        if(LoginActivity.expenses.getExpenses() != null){
-//            for(Expense expense: LoginActivity.expenses.getExpenses()){
-//                if(expense.getFriend().equals(getIntent().getStringExtra("friendName"))){
-//                    listOfExpense.add(expense);
-//
-//                    Log.d(TAG, "FriendActivity: " + expense.getExpenseTitle());
-//
-//                    myAdapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//            settleAll.setVisibility(View.VISIBLE);
-//            recyclerView.setVisibility(View.VISIBLE);
-//            emptyView.setVisibility(View.GONE);
-//        } else {
-//            Toast.makeText(FriendActivity.this, "Failed Fetching expense", Toast.LENGTH_SHORT).show();
-//        }
-
         db.collection("expenses").document(fbAuth.getUid()).collection("expenses")
                 .whereEqualTo("chosenName", getIntent().getStringExtra("chosenName"))
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -180,19 +138,18 @@ public class FriendActivity extends AppCompatActivity implements SelectListenerE
 
                     }
                 });
-
     }
-
 
     @Override
     public void onItemClicked(Expense myFriendsListAdapter) {
-        Toast.makeText(this, myFriendsListAdapter.getChosenName(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, myFriendsListAdapter.getAmount().toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, myFriendsListAdapter.getChosenName(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, myFriendsListAdapter.getAmount().toString(), Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(FriendActivity.this, SettleUpActivity.class);
         intent.putExtra("chosenName", myFriendsListAdapter.getChosenName());
         intent.putExtra("amount", myFriendsListAdapter.getAmount().toString());
         intent.putExtra("nameOfExpense", myFriendsListAdapter.getNameOfExpense());
+        intent.putExtra("type", myFriendsListAdapter.getType());
         startActivity(intent);
     }
 
