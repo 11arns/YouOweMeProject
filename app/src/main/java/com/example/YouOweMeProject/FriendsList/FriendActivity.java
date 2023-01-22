@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,26 +18,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.YouOweMeProject.Adapter.MyFriendAdapter;
-import com.example.YouOweMeProject.Adapter.MyFriendsListAdapter;
+import com.example.YouOweMeProject.Adapter.SelectListener;
+import com.example.YouOweMeProject.Adapter.SelectListenerExpense;
 import com.example.YouOweMeProject.FriendsList.Friend.SettleUpActivity;
-import com.example.YouOweMeProject.FriendsListActivity;
 import com.example.YouOweMeProject.Model.Expense;
-import com.example.YouOweMeProject.Model.Expenses;
-import com.example.YouOweMeProject.Model.Friend;
-import com.example.YouOweMeProject.Model.Friends;
 import com.example.YouOweMeProject.R;
-import com.example.YouOweMeProject.Welcome.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class FriendActivity extends AppCompatActivity {
+public class FriendActivity extends AppCompatActivity implements SelectListenerExpense {
 //    ArrayList<friendmodel> friendmodels = new ArrayList<>();
 
     ArrayList<Expense> listOfExpense;
@@ -89,7 +82,7 @@ public class FriendActivity extends AppCompatActivity {
         fbAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         listOfExpense = new ArrayList<Expense>();
-        myAdapter = new MyFriendAdapter(FriendActivity.this, listOfExpense);
+        myAdapter = new MyFriendAdapter(FriendActivity.this, listOfExpense, this);
 
         recyclerView.setAdapter(myAdapter);
 
@@ -188,6 +181,19 @@ public class FriendActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+
+    @Override
+    public void onItemClicked(Expense myFriendsListAdapter) {
+        Toast.makeText(this, myFriendsListAdapter.getChosenName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, myFriendsListAdapter.getAmount().toString(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(FriendActivity.this, SettleUpActivity.class);
+        intent.putExtra("chosenName", myFriendsListAdapter.getChosenName());
+        intent.putExtra("amount", myFriendsListAdapter.getAmount().toString());
+        intent.putExtra("nameOfExpense", myFriendsListAdapter.getNameOfExpense());
+        startActivity(intent);
     }
 
 }

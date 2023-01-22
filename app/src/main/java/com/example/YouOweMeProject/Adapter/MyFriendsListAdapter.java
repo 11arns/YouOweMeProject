@@ -47,7 +47,7 @@ public class MyFriendsListAdapter extends RecyclerView.Adapter<MyFriendsListAdap
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectListener.onItemClicked(list.get(position));
+                selectListener.onItemClicked(list.get(holder.getAdapterPosition()));
             }
         });
     }

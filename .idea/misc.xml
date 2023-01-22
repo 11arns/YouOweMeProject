@@ -42,14 +42,14 @@
         <entry key="app/src/main/res/layout/addexpenses_add_amount_confirmation.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/layout/addexpenses_addamount.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/addexpenses_oweyou.xml" value="0.2509057971014493" />
-        <entry key="app/src/main/res/layout/friend_recyclerviewrow.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/friend_recyclerviewrow.xml" value="0.1" />
         <entry key="app/src/main/res/layout/friendslist.xml" value="0.1" />
         <entry key="app/src/main/res/layout/friendslist_addfriend.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/layout/friendslist_addfriend_failed.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/friendslist_addfriend_successful.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/friendslist_card_row.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/layout/friendslist_friend.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/friendslist_friend_settleup.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/friendslist_friend_settleup.xml" value="0.25514068603515627" />
         <entry key="app/src/main/res/layout/friendslist_friend_settleup_confirmation.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/friendslist_recyclerviewrow.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/history.xml" value="0.3098958333333333" />

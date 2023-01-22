@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,10 +19,12 @@ import java.util.ArrayList;
 public class MyFriendAdapter extends RecyclerView.Adapter<MyFriendAdapter.MyViewHolder> {
     Context context;
     ArrayList<Expense> listOfExpense;
+    SelectListenerExpense selectListener;
 
-    public MyFriendAdapter(Context context, ArrayList<Expense> listOfExpense) {
+    public MyFriendAdapter(Context context, ArrayList<Expense> listOfExpense, SelectListenerExpense selectListener) {
         this.context = context;
         this.listOfExpense = listOfExpense;
+        this.selectListener = selectListener;
     }
 
     @NonNull
@@ -39,6 +42,13 @@ public class MyFriendAdapter extends RecyclerView.Adapter<MyFriendAdapter.MyView
         holder.amount.setText(expense.getAmount().toString());
         holder.nameOfExpense.setText(expense.getNameOfExpense());
         holder.type.setText(expense.getType());
+
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectListener.onItemClicked(listOfExpense.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -48,13 +58,14 @@ public class MyFriendAdapter extends RecyclerView.Adapter<MyFriendAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView amount, nameOfExpense, type;
+        public Button button;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             amount = itemView.findViewById(R.id.expenseamountTV);
             nameOfExpense = itemView.findViewById(R.id.expensenameTV);
             type = itemView.findViewById(R.id.expensestatusTV);
-
+            button = itemView.findViewById(R.id.btnsettleup);
         }
     }
 

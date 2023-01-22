@@ -16,7 +16,7 @@
             android:id="@+id/AddFriendButton"
             android:layout_width="239dp"
             android:layout_height="66dp"
-            android:layout_marginBottom="88dp"
+            android:layout_marginBottom="70dp"
             android:backgroundTint="@color/purple"
             android:gravity="center"
             android:text="ADD NEW FRIEND"
@@ -30,7 +30,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/friendslist_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="140dp"
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
         <TextView
