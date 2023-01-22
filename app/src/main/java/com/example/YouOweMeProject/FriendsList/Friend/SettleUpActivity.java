@@ -51,14 +51,23 @@ public class SettleUpActivity extends AppCompatActivity {
         fbAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        TextView type = findViewById(R.id.paidto);
+        if(getIntent().getStringExtra("type").equals("youOwe")){
+            type.setText("Paid to");
+        } else{
+            type.setText("Pays you");
+        }
+
+
         TextView name = findViewById(R.id.name);
         name.setText(getIntent().getStringExtra("chosenName"));
 
         EditText amount = findViewById(R.id.editTextTextPersonName2);
         amount.setText(getIntent().getStringExtra("amount"));
 
-        EditText nameOfExpense = findViewById(R.id.editTextTextPersonName3);
+        TextView nameOfExpense = findViewById(R.id.editTextTextPersonName3);
         nameOfExpense.setText(getIntent().getStringExtra("nameOfExpense"));
+
 
         Button Settleup = findViewById(R.id.btnsettleup);
         Settleup.setOnClickListener(new View.OnClickListener() {
