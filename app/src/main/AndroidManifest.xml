@@ -69,6 +69,9 @@
             android:name="com.example.YouOweMeProject.Settings.AboutUsActivity"
             android:parentActivityName="com.example.YouOweMeProject.SettingsActivity" />
         <activity
+            android:name="com.example.YouOweMeProject.Settings.HelpActivity"
+            android:parentActivityName="com.example.YouOweMeProject.SettingsActivity" />
+        <activity
             android:name="com.example.YouOweMeProject.Settings.Profile.EditProfileActivity"
             android:parentActivityName="com.example.YouOweMeProject.Settings.ProfileActivity" />
         <activity
