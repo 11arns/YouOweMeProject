@@ -1,6 +1,7 @@
 package com.example.YouOweMeProject.AddExpenses.Amount;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,9 @@ public class ConfirmationPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addexpenses_add_amount_confirmation);
         getSupportActionBar().hide();
+        //sound
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.sound);
+        mp.start();
 
         btndone = (Button)findViewById(R.id.btndone);
 

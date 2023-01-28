@@ -1,6 +1,7 @@
 package com.example.YouOweMeProject.FriendsList.Friend.SettleUp;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,9 @@ public class Confirmation extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.friendslist_friend_settleup_confirmation);
             getSupportActionBar().hide();
+            //sounds
+            MediaPlayer mp = MediaPlayer.create(this, R.raw.sound);
+            mp.start();
 
             Button Successfull = findViewById(R.id.btnsuccessful);
             Successfull.setOnClickListener(new View.OnClickListener() {
