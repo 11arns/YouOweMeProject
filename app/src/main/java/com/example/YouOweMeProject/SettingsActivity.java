@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.YouOweMeProject.Settings.HelpActivity;
 import com.example.YouOweMeProject.Settings.ProfileActivity;
 import com.example.YouOweMeProject.Settings.PrivacyActivity;
 import com.example.YouOweMeProject.Settings.AboutUsActivity;
@@ -35,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
     Button ProfileButton;
     Button PrivacyButton;
     Button AboutUsButton;
+    Button HelpButton;
     FirebaseAuth fAuth;
     Button editImageButton;
     ImageView profilePic;
@@ -86,6 +88,15 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SettingsActivity.this, AboutUsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        HelpButton = (Button) findViewById(R.id.HelpButton);
+        HelpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this, HelpActivity.class);
                 startActivity(intent);
             }
         });
