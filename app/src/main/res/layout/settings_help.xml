@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="136dp"
         android:gravity="center_horizontal"
-        android:text="Tutorial on how to use this application"
+        android:text="Tutorial on how to use this application:"
         android:textColor="#914cbb"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
